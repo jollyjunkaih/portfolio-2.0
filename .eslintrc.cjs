@@ -27,7 +27,7 @@ module.exports = {
     // React
     {
       files: ["**/*.{js,jsx,ts,tsx}"],
-      plugins: ["react", "jsx-a11y"],
+      plugins: ["react", "jsx-a11y", "@stylexjs"],
       extends: [
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
@@ -46,6 +46,27 @@ module.exports = {
         "import/resolver": {
           typescript: {},
         },
+      },
+      rules: {
+        "@stylexjs/valid-styles": [
+          "error",
+          {
+            propLimits: {
+              "mask+([a-zA-Z])": {
+                limit: null,
+                reason: "Use the `mask` shorthand property instead.",
+              },
+              fontSize: {
+                limit: "number",
+                reason: "Only numeric font values are allowed",
+              },
+              padding: {
+                limit: [0, 4, 8, 16, 32, 64],
+                reason: "Use a padding that conforms to the design system",
+              },
+            },
+          },
+        ],
       },
     },
 
